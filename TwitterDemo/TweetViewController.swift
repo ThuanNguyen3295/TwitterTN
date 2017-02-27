@@ -16,7 +16,7 @@ class TweetViewController: UIViewController {
         TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
             self.tweets = tweets
             for tweet in tweets {
-             print(tweet.text ?? "")
+             print(tweet.text!)
             }
             //tableviee.reloadData()
             
@@ -32,6 +32,9 @@ class TweetViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func logoutButton(_ sender: Any) {
+     TwitterClient.sharedInstance?.logout()
+    }
 
     /*
     // MARK: - Navigation

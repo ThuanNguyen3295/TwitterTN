@@ -28,11 +28,26 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    
+    func logout(){
+        User.currentUser = nil
+        deauthorize()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "UserDidLogout"), object: nil)
+    }
+    
     func handleOpenURL(url: NSURL){
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         
         fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential?) -> Void in
+            
+            self.currentAccount(success: { (user: User) in
+                User.currentUser = user
+                print("saved")
                 self.loginSuccess?()
+
+            }, failure: { (error: Error) in
+                self.loginFailure?(error)
+            })
             
         }, failure: { (error: Error?) in
             print("error: \(error?.localizedDescription)")
@@ -56,16 +71,16 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func currentAccount(){
+    func currentAccount(success: @escaping (User) -> (), failure: (Error) -> ()){
         
        get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             print("Account: \(response)")
             let userDictionary = response as! NSDictionary
             let user = User.init(dictionary: userDictionary)
-            print("\(user.name)")
-            
+           success(user)
         }
             , failure: { (task: URLSessionDataTask?, error: Error) in
+                self.loginFailure?(error)
                 
         })
     
