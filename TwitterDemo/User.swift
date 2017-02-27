@@ -10,10 +10,10 @@ import UIKit
 import BDBOAuth1Manager
 
 class User: NSObject {
-    var name: NSString?
-    var screenName: NSString?
+    var name: String?
+    var screenName: String?
     var profileURL: NSURL?
-    var tagline: NSString?
+    var tagline: String?
     
     var dictionary: NSDictionary?
     
@@ -21,9 +21,9 @@ class User: NSObject {
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
-        name = dictionary["name"] as? String as NSString?
-        screenName = dictionary["screeen_name"] as? String as NSString?
-        tagline = dictionary["description"] as? NSString
+        name = dictionary["name"] as? String
+        screenName = dictionary["screeen_name"] as? String
+        tagline = dictionary["description"] as? String
         let profileURLString = dictionary["profile_image_ulr_https"] as? NSString
         if let profileURLString = profileURLString {
             profileURL = NSURL(string: profileURLString as String)
