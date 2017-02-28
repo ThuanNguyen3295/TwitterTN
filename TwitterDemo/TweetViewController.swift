@@ -43,7 +43,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yy"
        cell.timeLabel.text = dateFormatter.string(from: tweet.timestamp) 
-        
+        cell.selectionStyle = .none
         if let imageURL = tweet.imageURL{
         cell.avatarImage.setImageWith(imageURL as URL)
         }
