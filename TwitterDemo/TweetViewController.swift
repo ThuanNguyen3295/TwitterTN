@@ -37,9 +37,16 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         let tweet = tweets[indexPath.row] as! Tweet
         cell.tweetLabel.text = tweet.text
+       // cell.tweetLabel.sizeToFit()
         cell.nameLabel.text = tweet.name
         cell.retweetCount.text  = String(tweet.retweetCount)
-       // cell.timeLabel.text = tweet.timestamp as? String
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yy"
+       cell.timeLabel.text = dateFormatter.string(from: tweet.timestamp) 
+        
+        if let imageURL = tweet.imageURL{
+        cell.avatarImage.setImageWith(imageURL as URL)
+        }
         return cell
     }
 
