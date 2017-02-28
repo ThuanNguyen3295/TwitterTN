@@ -44,6 +44,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         dateFormatter.dateFormat = "dd/MM/yy"
        cell.timeLabel.text = dateFormatter.string(from: tweet.timestamp) 
         cell.selectionStyle = .none
+        cell.likeLabel.text = String(tweet.favoritesCount)
         if let imageURL = tweet.imageURL{
         cell.avatarImage.setImageWith(imageURL as URL)
         }

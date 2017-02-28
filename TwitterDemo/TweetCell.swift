@@ -15,6 +15,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var likeLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

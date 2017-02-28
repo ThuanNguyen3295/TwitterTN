@@ -120,6 +120,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImage" destination="ERv-rI-Il4" id="ZbH-ME-UnT"/>
+                                            <outlet property="likeLabel" destination="5yf-Ff-G2f" id="itf-Iz-pUA"/>
                                             <outlet property="nameLabel" destination="stK-HS-0R6" id="X4p-Nb-8og"/>
                                             <outlet property="retweetCount" destination="fq2-Ec-2xP" id="lyk-sU-dF0"/>
                                             <outlet property="timeLabel" destination="o67-F5-ux6" id="mTW-Lb-hZd"/>
