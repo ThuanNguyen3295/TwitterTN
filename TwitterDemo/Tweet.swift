@@ -17,6 +17,8 @@ class Tweet: NSObject {
     var user: User?
     var imageURL: NSURL?
     
+    var id_str: String?
+    
     init(dictionary: NSDictionary) {
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int ) ?? 0
@@ -25,6 +27,7 @@ class Tweet: NSObject {
             user = User(dictionary: userData)
         }
         name = user?.name
+        id_str = dictionary["id_str"] as? String
         
        imageURL = user?.profileURL
         

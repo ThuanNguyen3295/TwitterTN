@@ -85,6 +85,25 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     
     }
+    func retweet (id: String?, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()){
+        post("1.1/statuses/retweet/\(id!).json", parameters:
+            nil, progress: nil, success: { (task: URLSessionDataTask, response: Any) in
+                let tweetDictionary = response as! NSDictionary
+                let tweet = Tweet.init(dictionary: tweetDictionary)
+                success(tweet)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print(error.localizedDescription)
+        }
+          }
     
-
+    
+    
+    func likeTweet (id: String?, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
+        post("1.1/favorites/create.json?id=\(id!)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, Any) in
+             success(true)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("Error \(error.localizedDescription)")
+            failure(error)
+        }
+    }
 }
