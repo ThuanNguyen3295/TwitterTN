@@ -96,8 +96,6 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
           }
     
-    
-    
     func likeTweet (id: String?, success: @escaping (Bool) -> (), failure: @escaping (Error) -> ()) {
         post("1.1/favorites/create.json?id=\(id!)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, Any) in
              success(true)

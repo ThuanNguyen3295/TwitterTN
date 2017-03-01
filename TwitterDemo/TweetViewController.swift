@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TweetTableViewCellDelegate{
    
     
     var tweets: [Tweet]!
@@ -29,6 +29,8 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(error.localizedDescription)
         })
         
+        
+        
     }
         func refreshControlAction(_ refreshControl: UIRefreshControl) {
             
@@ -42,13 +44,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }, failure: { (error: Error) in
                 print(error.localizedDescription)
             })
-                
-                // ... Use the new data to update the data source ...
-                
-                // Reload the tableView now that there is new data
                 tableView.reloadData()
-                
-                // Tell the refreshControl to stop spinning
                 refreshControl.endRefreshing()
         }
       
@@ -60,11 +56,16 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+      
+      //  cell.delegate = self
+        
+        
+        
         let tweet = tweets[indexPath.row]
         cell.tweetLabel.text = tweet.text
-       // cell.tweetLabel.sizeToFit()
         cell.nameLabel.text = tweet.name
         cell.retweetCount.text  = String(tweet.retweetCount)
         let dateFormatter = DateFormatter()
@@ -78,6 +79,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    
     @IBAction func retweetClicked(_ sender: Any) {
         let indexPath = tableView.indexPathForSelectedRow
         let tweet = tweets[(indexPath?.row)!]
@@ -90,8 +92,6 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(error.localizedDescription)
         })
     }
-    
-    
     @IBAction func likeCliked(_ sender: Any) {
         
        let indexPath = tableView.indexPathForSelectedRow
@@ -106,7 +106,6 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
        })
     }
 
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -115,7 +114,19 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBAction func logoutButton(_ sender: Any) {
      TwitterClient.sharedInstance?.logout()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    }
+    func profileImageViewTapped(cell: TweetCell, user: User) {
+        let storyboard = UIStoryboard(name: "main", bundle: nil)
+//        if let profileVC = storyboard.instantiateViewController(withIdentifier: StorybordIdentifier.ProfileTableViewControllerIden) as? ProfileTableViewController{
+//            profileVC.user = user //set the profile user before your push
+//            self.navigationController?.pushViewController(profileVC, animated: true)
+//        }
+        print("tapped")
+    }
+    
 
+    
     /*
     // MARK: - Navigation
 
