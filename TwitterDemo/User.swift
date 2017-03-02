@@ -20,8 +20,8 @@ class User: NSObject {
     var likeCount: Int?
     var followingCount: Int?
     var followersCount: Int?
-    
-    
+    var backgroundImageURL: NSURL?
+        
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -37,6 +37,11 @@ class User: NSObject {
         likeCount = dictionary["favourites_count"] as? Int
         followingCount = dictionary["friends_count"] as? Int
         followersCount = dictionary["followers_count"] as? Int
+        let backgroundImageURLString = dictionary["profile_background_image_url_https"] as? NSString
+        if let backgroundImageURLString = backgroundImageURLString {
+            backgroundImageURL = NSURL(string: backgroundImageURLString as String)
+        }
+       
         
         
     }

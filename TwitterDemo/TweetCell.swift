@@ -13,8 +13,10 @@ protocol TweetTableViewCellDelegate: class  {
 }
 class TweetCell: UITableViewCell {
 
+    @IBOutlet weak var retweetImage: UIButton!
     @IBOutlet weak var likeImage: UIButton!
     @IBOutlet weak var retweetCount: UILabel!
+    
     
     @IBOutlet weak var avatarImage: UIImageView! {
         didSet{
@@ -29,8 +31,11 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     @IBOutlet weak var likeLabel: UILabel!
+    
     weak var delegate: TweetTableViewCellDelegate!
     var tweet: Tweet!
+    var tableView: UITableView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -42,9 +47,34 @@ class TweetCell: UITableViewCell {
         if let delegate = delegate{
             delegate.profileImageViewTapped(cell: self, user: self.tweet.user!)
         }
+        
     }
     
-
+    @IBAction func retweeted(_ sender: Any) {
+        self.retweetImage.setImage(UIImage(named: "retweet-icon-green"), for: [])
+        
+        let id = tweet.id_str
+        TwitterClient.sharedInstance?.retweet(id: id, success: { (tweetReturn: Tweet) in
+            print("Tweet: \(tweetReturn.text!)")
+            self.tweet.retweetCount = self.tweet.retweetCount+1
+            self.tableView.reloadData()
+        }, failure: { (error: Error) in
+            print(error.localizedDescription)
+        })
+    }
+    
+    
+    @IBAction func liked(_ sender: Any) {
+        self.likeImage.setImage(UIImage(named: "favor-icon-red"), for: [])
+        let id = tweet.id_str
+        TwitterClient.sharedInstance?.likeTweet(id: id, success: { (Tweet) in
+            
+            self.tweet.favoritesCount = self.tweet.favoritesCount+1
+            self.tableView.reloadData()
+        }, failure: {(error: Error) in
+            print("Error: \(error.localizedDescription)")
+        })
+    }
     
 
 

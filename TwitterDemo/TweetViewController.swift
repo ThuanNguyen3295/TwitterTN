@@ -28,9 +28,6 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }, failure: { (error: Error) in
             print(error.localizedDescription)
         })
-        
-        
-        
     }
         func refreshControlAction(_ refreshControl: UIRefreshControl) {
             
@@ -59,12 +56,11 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-      
-      //  cell.delegate = self
         
-        
-        
+        cell.delegate = self
         let tweet = tweets[indexPath.row]
+        cell.tweet = tweet
+            
         cell.tweetLabel.text = tweet.text
         cell.nameLabel.text = tweet.name
         cell.retweetCount.text  = String(tweet.retweetCount)
@@ -75,36 +71,13 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.likeLabel.text = String(tweet.favoritesCount)
         if let imageURL = tweet.imageURL{
         cell.avatarImage.setImageWith(imageURL as URL)
+            
+        cell.tableView = self.tableView            
         }
         
         return cell
     }
     
-    @IBAction func retweetClicked(_ sender: Any) {
-        let indexPath = tableView.indexPathForSelectedRow
-        let tweet = tweets[(indexPath?.row)!]
-        let id = tweet.id_str
-        TwitterClient.sharedInstance?.retweet(id: id, success: { (tweetReturn: Tweet) in
-            print("Tweet: \(tweetReturn.text!)")
-            tweet.retweetCount = tweet.retweetCount+1
-            self.tableView.reloadData()
-        }, failure: { (error: Error) in
-            print(error.localizedDescription)
-        })
-    }
-    @IBAction func likeCliked(_ sender: Any) {
-        
-       let indexPath = tableView.indexPathForSelectedRow
-        let tweet = tweets[(indexPath?.row)!]
-        let id = tweet.id_str
-       TwitterClient.sharedInstance?.likeTweet(id: id, success: { (Tweet) in
-            
-            tweet.favoritesCount = tweet.favoritesCount+1
-            self.tableView.reloadData()
-       }, failure: {(error: Error) in
-            print("Error: \(error.localizedDescription)")
-       })
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -116,13 +89,14 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     }
+    
+    
     func profileImageViewTapped(cell: TweetCell, user: User) {
-        let storyboard = UIStoryboard(name: "main", bundle: nil)
-//        if let profileVC = storyboard.instantiateViewController(withIdentifier: StorybordIdentifier.ProfileTableViewControllerIden) as? ProfileTableViewController{
-//            profileVC.user = user //set the profile user before your push
-//            self.navigationController?.pushViewController(profileVC, animated: true)
-//        }
-        print("tapped")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let OUservc = storyboard.instantiateViewController(withIdentifier: "OUsersViewController") as? OUsersViewController{
+            OUservc.user = user //set the profile user before your push
+            self.navigationController?.pushViewController(OUservc, animated: true)
+        }
     }
     
 

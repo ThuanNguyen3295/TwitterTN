@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var likeLabel: UILabel!
@@ -20,16 +21,21 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var sreenNameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if let user = User.currentUser {
         userNameLabel.text = user.name
         sreenNameLabel.text = "@\(user.screenName!)"
         dateJoinedLabel.text = user.joinedDate
         userAvatarImage.setImageWith(user.profileURL as! URL)
+        userAvatarImage.layer.cornerRadius = 5
+        userAvatarImage.clipsToBounds = true
+            
         tweetLabel.text = String(describing: user.tweetCount!)
         likeLabel.text = String(describing: user.likeCount!)
         followingLabel.text = String(describing: user.followingCount!)
         followersLabel.text = String(describing: user.followersCount!)
-            
+        print(user.backgroundImageURL)
+       // backgroundImage.setImageWith(user.backgroundImageURL as! URL)
         }
         
         // Do any additional setup after loading the view.

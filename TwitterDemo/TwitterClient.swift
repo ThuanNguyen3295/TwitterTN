@@ -27,6 +27,13 @@ class TwitterClient: BDBOAuth1SessionManager {
             self.loginFailure?(error!)
         })
     }
+    func tweetStatus(status: String, success: ()->(), failure: (Error) -> ()){
+        post("1.1/statuses/update.json?status=\(status)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, respone: Any) in
+        }) { (task: URLSessionDataTask?, error: Error) in
+        print(error.localizedDescription)
+        }
+    
+    }
     
     
     func logout(){
