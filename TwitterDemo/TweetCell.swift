@@ -16,6 +16,15 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetImage: UIButton!
     @IBOutlet weak var likeImage: UIButton!
     @IBOutlet weak var retweetCount: UILabel!
+
+    @IBOutlet weak var cellView: UIView! {
+        didSet {
+            self.cellView.isUserInteractionEnabled = true
+                let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_:)))
+                self.cellView.addGestureRecognizer(userProfileTap)
+        }
+    }
+    
     
     
     @IBOutlet weak var avatarImage: UIImageView! {
@@ -24,7 +33,6 @@ class TweetCell: UITableViewCell {
             //tap for userImageView
             let userProfileTap = UITapGestureRecognizer(target: self, action: #selector(userProfileTapped(_:)))
             self.avatarImage.addGestureRecognizer(userProfileTap)
-            
         }
     }
     @IBOutlet weak var nameLabel: UILabel!

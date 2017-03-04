@@ -98,7 +98,6 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.navigationController?.pushViewController(OUservc, animated: true)
         }
     }
-    
 
     
     /*

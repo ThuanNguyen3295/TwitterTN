@@ -30,8 +30,10 @@ class ComposeViewController: UIViewController {
     @IBAction func tweetStatus(_ sender: Any) {
         let status = tweetTextView.text!
        TwitterClient.sharedInstance?.tweetStatus(status: status, success: {
+        self.dismissKeyboard()
+        self.dismiss(animated: true, completion: nil)
         
-       }, failure: { (error: Error) in
+            }, failure: { (error: Error) in
         print(error.localizedDescription)
        })
     }

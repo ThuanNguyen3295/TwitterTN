@@ -14,7 +14,6 @@ class OUsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = user?.name
-
         // Do any additional setup after loading the view.
     }
 

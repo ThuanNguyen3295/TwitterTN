@@ -81,11 +81,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="107" id="uM6-1u-zA6" customClass="TweetCell" customModule="TwitterDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="107" id="uM6-1u-zA6" customClass="TweetCell" customModule="TwitterDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uM6-1u-zA6" id="A8x-nN-abG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="106"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="106"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tweets" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Up-HR-Fmc">
@@ -148,6 +148,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImage" destination="ERv-rI-Il4" id="ZbH-ME-UnT"/>
+                                            <outlet property="cellView" destination="A8x-nN-abG" id="MIN-Cj-3hN"/>
                                             <outlet property="likeImage" destination="5YG-e4-7D8" id="TIt-iA-zqR"/>
                                             <outlet property="likeLabel" destination="5yf-Ff-G2f" id="itf-Iz-pUA"/>
                                             <outlet property="nameLabel" destination="stK-HS-0R6" id="X4p-Nb-8og"/>
@@ -295,7 +296,7 @@
                     <navigationItem key="navigationItem" title="My Profile" id="TIh-vX-qJh">
                         <barButtonItem key="rightBarButtonItem" title="Tweet" id="t4x-aw-B0g">
                             <connections>
-                                <segue destination="Hb9-NW-08v" kind="push" id="0dd-lJ-QaO"/>
+                                <segue destination="wgo-M3-U7M" kind="presentation" id="znE-Ui-fMf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -372,7 +373,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Tf-dU-G3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3253.125" y="167.95774647887325"/>
+            <point key="canvasLocation" x="3158" y="168"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L5i-jq-udX">
@@ -391,6 +392,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tAq-yT-L2F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="883" y="151"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FbN-IY-eVs">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wgo-M3-U7M" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kbz-OU-8lg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Hb9-NW-08v" kind="relationship" relationship="rootViewController" id="xTy-tQ-Ba8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0SS-C9-JTz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3819" y="168"/>
         </scene>
     </scenes>
     <resources>

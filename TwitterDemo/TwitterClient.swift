@@ -27,12 +27,13 @@ class TwitterClient: BDBOAuth1SessionManager {
             self.loginFailure?(error!)
         })
     }
-    func tweetStatus(status: String, success: ()->(), failure: (Error) -> ()){
+    func tweetStatus(status: String, success: @escaping ()->(), failure: @escaping (Error) -> ()){
         
         let encodedStatus = status.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         post("1.1/statuses/update.json?status=\(encodedStatus!)", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, respone: Any) in
+            success()
         }) { (task: URLSessionDataTask?, error: Error) in
-        print(error.localizedDescription)
+            failure(error.localizedDescription as! Error)
         }
     }
     
