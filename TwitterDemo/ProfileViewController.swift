@@ -34,10 +34,8 @@ class ProfileViewController: UIViewController {
         likeLabel.text = String(describing: user.likeCount!)
         followingLabel.text = String(describing: user.followingCount!)
         followersLabel.text = String(describing: user.followersCount!)
-        print(user.backgroundImageURL)
-       // backgroundImage.setImageWith(user.backgroundImageURL as! URL)
+       backgroundImage.setImageWith(user.backgroundImageURL as! URL)
         }
-        
         // Do any additional setup after loading the view.
     }
 

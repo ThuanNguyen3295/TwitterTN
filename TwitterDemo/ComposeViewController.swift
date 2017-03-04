@@ -30,12 +30,7 @@ class ComposeViewController: UIViewController {
     @IBAction func tweetStatus(_ sender: Any) {
         let status = tweetTextView.text!
        TwitterClient.sharedInstance?.tweetStatus(status: status, success: {
-//        
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        if let OUservc = storyboard.instantiateViewController(withIdentifier: "TweetViewController") as? TweetViewController{
-//            window?.rootViewController = OUservc
-//            }
-//        
+        
        }, failure: { (error: Error) in
         print(error.localizedDescription)
        })
