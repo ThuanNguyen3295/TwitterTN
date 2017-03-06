@@ -24,8 +24,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButton(_ sender: Any) {
-        
-        
         let twitterClient = TwitterClient.sharedInstance
         twitterClient?.login(success: {
             print("logged in")

@@ -19,23 +19,31 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
        // self.view.endEditing(false)
         tweetTextView.becomeFirstResponder()
-      name.text = User.currentUser?.name
-      screenName.text = User.currentUser?.screenName
+        if let currentUser = User.currentUser {
+            name.text = currentUser.name
+      screenName.text = "@\(currentUser.screenName!)"
       avatarImage.setImageWith(User.currentUser?.profileURL as! URL)
+        }
     let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func cancelCompose(_ sender: Any) {
+        self.dismissKeyboard()
+        self.dismiss(animated: true, completion: nil)
+    }
     @IBAction func tweetStatus(_ sender: Any) {
-        let status = tweetTextView.text!
+        var status = tweetTextView.text!
+        status = status.replacingOccurrences(of: "Status:", with: "")
        TwitterClient.sharedInstance?.tweetStatus(status: status, success: {
         self.dismissKeyboard()
         self.dismiss(animated: true, completion: nil)
+
         
             }, failure: { (error: Error) in
         print(error.localizedDescription)
-       })
+            })
     }
     func dismissKeyboard(){
         view.endEditing(true)

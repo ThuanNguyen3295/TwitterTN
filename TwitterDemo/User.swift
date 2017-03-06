@@ -42,8 +42,6 @@ class User: NSObject {
         if let backgroundImageURLString = backgroundImageURLString {
             backgroundImageURL = NSURL(string: backgroundImageURLString as String)
         }
-       
-        
         
     }
     static var _currentUser: User?

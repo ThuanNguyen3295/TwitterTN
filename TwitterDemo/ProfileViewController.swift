@@ -29,7 +29,6 @@ class ProfileViewController: UIViewController {
         userAvatarImage.setImageWith(user.profileURL as! URL)
         userAvatarImage.layer.cornerRadius = 5
         userAvatarImage.clipsToBounds = true
-            
         tweetLabel.text = String(describing: user.tweetCount!)
         likeLabel.text = String(describing: user.likeCount!)
         followingLabel.text = String(describing: user.followingCount!)

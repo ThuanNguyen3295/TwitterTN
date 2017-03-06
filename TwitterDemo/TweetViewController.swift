@@ -30,9 +30,6 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         })
     }
         func refreshControlAction(_ refreshControl: UIRefreshControl) {
-            
-           // let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-            
             TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
                 self.tweets = tweets
                 self.tableView.delegate = self
@@ -77,8 +74,6 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -95,6 +90,7 @@ class TweetViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let OUservc = storyboard.instantiateViewController(withIdentifier: "OUsersViewController") as? OUsersViewController{
             OUservc.user = user //set the profile user before your push
+            OUservc.cell = cell
             self.navigationController?.pushViewController(OUservc, animated: true)
         }
     }
